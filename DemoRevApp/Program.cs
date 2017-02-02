@@ -25,6 +25,8 @@ namespace DemoRevApp
             Student eric = new Student("eric", "a", "money", "eric@gmail.com", 9);
             Student summer = new Student("summer", "a", "money", "summer@gmail.com", 10);
             Course dotnet = new Course("dotnet", new DateTime());
+            dotnet.cr = Administrator.ChangeCourseStatus;
+
             dotnet.AddStudent(mike);
             dotnet.AddStudent(paul);
             dotnet.AddStudent(devonte);
@@ -35,6 +37,17 @@ namespace DemoRevApp
             dotnet.AddStudent(antone);
             dotnet.AddStudent(eric);
             dotnet.AddStudent(summer);
+            dotnet.AddStudent(mike);
+            dotnet.AddStudent(paul);
+            dotnet.AddStudent(devonte);
+            dotnet.AddStudent(stephen);
+            dotnet.AddStudent(kirkland);
+            dotnet.AddStudent(chris);
+            dotnet.AddStudent(alain);
+            dotnet.AddStudent(antone);
+            dotnet.AddStudent(eric);
+            dotnet.AddStudent(summer);
+            
 
             var studentsNamedStephen = dotnet.GetStudentByFullname("mike");
             //    dotnet.AddStudent(mike);
@@ -51,7 +64,9 @@ namespace DemoRevApp
             Console.WriteLine(dotnet.GetStudentRoster().Count);
            
             List<Student> slist = new List<Student>();
-            Administrator admin = new Administrator();
+            Administrator admin =  Administrator.GetInstance;
+            Administrator admin2 = Administrator.GetInstance;
+
             Console.ReadLine();
            
 
@@ -87,5 +102,7 @@ namespace DemoRevApp
                 //close file
             }                             */
         }
+
+        
     }
 }

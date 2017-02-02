@@ -11,17 +11,14 @@ namespace DemoUniversity1.Courses
     {
         private List<Student> studentRoster = new List<Student>();
 
-        public delegate bool CloseRegistration();
-        public CloseRegistration cr;
+        public delegate bool CloseRegistration(Course thisCourseToClose);
+        public CloseRegistration cr = null;
 
         public bool isFull
         {
             get
             {
-                if(cr != null && studentRoster.Count == Global.maxStudents)
-                {
-
-                }
+                
                 return studentRoster.Count == Global.maxStudents;
             }
 
@@ -32,8 +29,8 @@ namespace DemoUniversity1.Courses
         private string major;
         private DateTime timeOfDay;
         private int creditHour;
-       
-        
+        public bool isClosed;
+
         public Course(string title, DateTime timeOfDay, int creditHour = 1, string major = "Elective")
         {
             this.title = title;
@@ -43,9 +40,7 @@ namespace DemoUniversity1.Courses
           //  this.id = id;
         }
 
-        public Course()
-        {
-        }
+        
 
         public int RosterCount
         {
@@ -101,8 +96,13 @@ namespace DemoUniversity1.Courses
 
         public bool AddStudent(Student student)
         {
+
             SpaceCheck(studentRoster.Count + 1);
             studentRoster.Add(student);
+            if ( cr != null && isFull)
+            {
+                cr(this);
+            }
             return true;
         }
         public bool AddStudents(List<Student> roster)
