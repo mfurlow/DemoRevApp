@@ -8,8 +8,8 @@ namespace DemoUniversity1.Users
 {
     public abstract class Users
     {
-        private string Fname;
-        private string Lname;
+        public string Fname;
+        public string Lname;
         protected string password;
         private string email;
         private int id;
@@ -28,6 +28,7 @@ namespace DemoUniversity1.Users
         public Users(string Fname, String Lname, string password, string email, int id)
         {
             this.Fname = Fname;
+            this.Lname = Lname;
             this.password = password;
             this.email = email;
             this.id = id;

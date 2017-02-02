@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DemoUniversity1.Courses;
 
 namespace DemoUniversity1.Users
 {
@@ -11,7 +12,7 @@ namespace DemoUniversity1.Users
         private string major;
         private bool isFulltime;
         private string registeredCourses;
-     //   Dictionary<string, Courses >
+        Dictionary<string, Course> classes = new Dictionary<string, Course>();
         // enum year
         //array of their courses
 
@@ -28,18 +29,18 @@ namespace DemoUniversity1.Users
             info.Append($"\n (major)");
             info.Append($"\nfulltime: (isFulltime)");
 
-                      if (classes.Count == 0)
+         /*             if (classes.Count == 0)
                       {
                           info.Append($"not registered for classes");
                       }
                       else
                       {
-                          foreach(var item in classes)
+                          foreach(KeyvaluePair<string, Courses> item in classes)
                           {
                               info.Append('\n');
                               info.Append(item.);
                           }
-                      }        
+                      }        */
             return "";     
         }
 

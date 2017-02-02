@@ -7,13 +7,21 @@ using DemoUniversity1.Users;
 
 namespace DemoUniversity1.Courses
 {
-    public class Courses : ICourse
+    public class Course : ICourse
     {
         private List<Student> studentRoster = new List<Student>();
+
+        public delegate bool CloseRegistration();
+        public CloseRegistration cr;
+
         public bool isFull
         {
             get
             {
+                if(cr != null && studentRoster.Count == Global.maxStudents)
+                {
+
+                }
                 return studentRoster.Count == Global.maxStudents;
             }
 
@@ -24,15 +32,18 @@ namespace DemoUniversity1.Courses
         private string major;
         private DateTime timeOfDay;
         private int creditHour;
-        public Courses(string title, DateTime timeOfDay, int creditHour = 1, string major = "Elective")
+       
+        
+        public Course(string title, DateTime timeOfDay, int creditHour = 1, string major = "Elective")
         {
             this.title = title;
             this.major = major;
             this.timeOfDay = timeOfDay;
             this.creditHour = creditHour;
+          //  this.id = id;
         }
 
-        public Courses()
+        public Course()
         {
         }
 
@@ -44,13 +55,39 @@ namespace DemoUniversity1.Courses
             }
         }
 
-        
+        public Student GetStudentById(int id)
+        {
+            var student = studentRoster.Where(x => x.Id == id).FirstOrDefault();
+                return student;
+        }
+
+        public Student GetStudentByFirstName(string fn)
+        {
+            var results = studentRoster.Where(person => person.Fname == fn).FirstOrDefault();
+            return results;
+        }
+
+        public Student GetStudentByFullname(string name)
+        {
+            var result = studentRoster.Where(p => p.FullName == name).FirstOrDefault();
+            return result;
+        }
+
+        public Student GetStudentByFullName(string firstname, string lastname)
+        {
+            return GetStudentByFullname(firstname + " " + lastname);
+        }
+
+        public bool RemoveStudentById(int id)
+        {
+          return  studentRoster.Remove(GetStudentById(id));            
+        }
 
         public string Title
         {
             get
             {
-                throw new NotImplementedException();
+                return title; ;
             }
         }
 
@@ -78,7 +115,7 @@ namespace DemoUniversity1.Courses
             return true;
         }
 
-        public List<Student> GetStudentRositer()
+        public List<Student> GetStudentRoster()
         {
             return studentRoster;
         }
@@ -106,7 +143,7 @@ namespace DemoUniversity1.Courses
             }
             return true;
         }
-
+        
         
     }
 }

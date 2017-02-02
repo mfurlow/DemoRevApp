@@ -16,7 +16,7 @@ namespace DemoUniversity1.Courses
         
         bool  isFull{ get; }
         int RosterCount { get; }
-        List<Student> GetStudentRositer();
+  //      List<Student> GetStudentRoster();
         //    bool AddStudents(List<Student> roster);
 
         string title { get;  }
