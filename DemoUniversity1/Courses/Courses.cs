@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DemoUniversity1.Users;
+using System.Threading;
 
 namespace DemoUniversity1.Courses
 {
@@ -115,11 +116,25 @@ namespace DemoUniversity1.Courses
             return true;
         }
 
-        public List<Student> GetStudentRoster()
+        public async Task<List<Student>> GetStudentRoster()
         {
-            return studentRoster;
+            Console.WriteLine("Start async");
+            var results = await FetchRoster();
+            Console.WriteLine("End async");
+            return results;
         }
 
+        // just some method thqt returns student list, this is a throw away method
+        public void PrintRosterCount()
+        {
+            Thread.Sleep(1000);
+            Console.WriteLine("this is just a test for thread " + studentRoster.Count);
+        }
+
+        public Task<List<Student>> FetchRoster()
+        {
+            return Task.Run(() => { return studentRoster; });
+        }
         public bool RemoveStudent(Student student)
         {
             throw new NotImplementedException();

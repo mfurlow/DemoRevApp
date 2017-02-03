@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DemoUniversity1.Users;
 using DemoUniversity1.Courses;
-
+using System.Threading;
 
 namespace DemoRevApp
 {
@@ -13,8 +13,8 @@ namespace DemoRevApp
     {
         static void Main(string[] args)
         {
-        //    Courses demoCourse = new Courses();
-            Student mike = new Student("mike", "a", "money", "mikek@gmail.com", 1,"cs");
+            //    Courses demoCourse = new Courses();
+            Student mike = new Student("mike", "a", "money", "mikek@gmail.com", 1, "cs");
             Student paul = new Student("paul", "a", "money", "paul@gmail.com", 2);
             Student devonte = new Student("devonte", "a", "money", "devonte@gmail.com", 3);
             Student stephen = new Student("stephen", "a", "money", "stephen@gmail.com", 4);
@@ -47,25 +47,32 @@ namespace DemoRevApp
             dotnet.AddStudent(antone);
             dotnet.AddStudent(eric);
             dotnet.AddStudent(summer);
-            
 
-            var studentsNamedStephen = dotnet.GetStudentByFullname("mike");
-            //    dotnet.AddStudent(mike);
+            var studentlist = dotnet.GetStudentRoster();
+            Console.WriteLine(studentlist.Result.Count);
 
-            Console.WriteLine(studentsNamedStephen);
+            Thread t1 = new Thread(dotnet.PrintRosterCount);
+            t1.Start();
+            t1.Join();
+            Console.WriteLine("Do something else");
 
-            Console.WriteLine(dotnet.RemoveStudentById(1));
-            Console.WriteLine(dotnet.GetStudentById(1));
-            if (dotnet.GetStudentById(1) == null)
-            {
-                Console.WriteLine("no student found");
-            }
+            //var studentsNamedStephen = dotnet.GetStudentByFullname("mike");
+            ////    dotnet.AddStudent(mike);
+
+            //Console.WriteLine(studentsNamedStephen);
+
+            //Console.WriteLine(dotnet.RemoveStudentById(1));
+            //Console.WriteLine(dotnet.GetStudentById(1));
+            //if (dotnet.GetStudentById(1) == null)
+            //{
+            //    Console.WriteLine("no student found");
+            //}
            
-            Console.WriteLine(dotnet.GetStudentRoster().Count);
+            //Console.WriteLine(dotnet.GetStudentRoster().Count);
            
-            List<Student> slist = new List<Student>();
-            Administrator admin =  Administrator.GetInstance;
-            Administrator admin2 = Administrator.GetInstance;
+            //List<Student> slist = new List<Student>();
+            //Administrator admin =  Administrator.GetInstance;
+            //Administrator admin2 = Administrator.GetInstance;
 
             Console.ReadLine();
            
